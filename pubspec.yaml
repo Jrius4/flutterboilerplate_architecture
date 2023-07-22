@@ -41,7 +41,9 @@ dependencies:
   equatable: ^2.0.5
   # get_it for service locator
   get_it: ^7.6.0
+  # intl for date format
   intl: ^0.18.1
+  # floor for database
   floor: ^1.4.2
   #retrofit for requests to api
   retrofit: ^4.0.1 

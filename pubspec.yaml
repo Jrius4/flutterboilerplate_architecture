@@ -47,8 +47,11 @@ dependencies:
   floor: ^1.4.2
   #retrofit for requests to api
   retrofit: ^4.0.1 
+  # for logging purpose
+  logger: any 
   flutter_hooks: ^0.19.0
   cached_network_image: ^3.2.3
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:

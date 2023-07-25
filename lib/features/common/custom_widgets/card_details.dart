@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tariffu/custom_widgets/custom_text.dart';
-import 'package:tariffu/utils/constants.dart';
-import 'package:tariffu/utils/designers.dart';
+import 'package:flutter_primary_architecture/core/constants/constants.dart';
+import 'package:flutter_primary_architecture/core/utils/designers.dart';
+import 'package:flutter_primary_architecture/features/common/custom_widgets/custom_text.dart';
 
 class CardDetails extends StatefulWidget {
   Map item;

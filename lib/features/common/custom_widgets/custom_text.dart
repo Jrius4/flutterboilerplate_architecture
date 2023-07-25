@@ -22,7 +22,7 @@ class CustomText extends StatelessWidget {
       textString,
       textAlign: textAlign ?? TextAlign.center,
       style: TextStyle(
-          // fontFamily: textFamily ?? 'Comfortaa',
+          fontFamily: textFamily ?? 'Comfortaa',
           fontSize: textFontSize ?? 12,
           color: textColor ?? Colors.black87,
           fontWeight: textFontWeight ?? FontWeight.w600),

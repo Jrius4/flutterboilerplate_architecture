@@ -35,7 +35,6 @@ Future<File?> pickImage(BuildContext context) async {
       image = File(pickedImage.path);
     }
   } catch (e) {
-    logApp(["error:", e]);
     showSnackBar(context, e.toString(), Colors.red, Colors.white);
   }
 

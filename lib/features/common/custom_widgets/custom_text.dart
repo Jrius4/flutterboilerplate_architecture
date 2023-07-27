@@ -7,6 +7,7 @@ class CustomText extends StatelessWidget {
   Color? textColor;
   String? textFamily;
   TextAlign? textAlign;
+  int? textMaxLines;
   CustomText(
       {super.key,
       required this.textString,
@@ -14,13 +15,16 @@ class CustomText extends StatelessWidget {
       this.textFontSize,
       this.textColor,
       this.textAlign,
-      this.textFamily});
+      this.textFamily,
+      this.textMaxLines});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       textString,
       textAlign: textAlign ?? TextAlign.center,
+      maxLines: textMaxLines ?? 10,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
           fontFamily: textFamily ?? 'Comfortaa',
           fontSize: textFontSize ?? 12,

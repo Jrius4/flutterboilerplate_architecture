@@ -26,7 +26,7 @@ class ArticleTile extends StatelessWidget {
         : CachedNetworkImage(
             imageUrl: article!.urlToImage ?? '',
             imageBuilder: (context, imageProvider) => Padding(
-              padding: EdgeInsetsDirectional.only(end: 14),
+              padding: const EdgeInsetsDirectional.only(end: 14),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
                 child: Container(
@@ -47,10 +47,10 @@ class ArticleTile extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width / 3,
                   height: double.maxFinite,
-                  child: const CupertinoActivityIndicator(),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.08),
                   ),
+                  child: const CupertinoActivityIndicator(),
                 ),
               ),
             ),
@@ -72,6 +72,40 @@ class ArticleTile extends StatelessWidget {
   }
 
   Widget _buildTitleAndDescription() {
-    return SizedBox();
+    return Expanded(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 7),
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomText(
+              textColor: Colors.black87,
+              textString: article!.title ?? '',
+              textMaxLines: 3,
+            ),
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.only(top: 7.0),
+              child: CustomText(
+                textString: article!.description ?? '',
+                textColor: Colors.black54,
+                textMaxLines: 3,
+              ),
+            )),
+            Row(
+              children: [
+                const Icon(
+                  Icons.timeline_outlined,
+                  size: 16,
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                CustomText(textString: "${article!.publishedAt!.toLocal()}")
+              ],
+            )
+          ]),
+    ));
   }
 }

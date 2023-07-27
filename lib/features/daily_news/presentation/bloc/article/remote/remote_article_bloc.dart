@@ -23,7 +23,6 @@ class RemoteArticlesBloc
     }
 
     if (dataState is DataFailed) {
-      logApp(dataState.error!.message);
       emit(RemoteArticlesError(dataState.error!));
     }
   }

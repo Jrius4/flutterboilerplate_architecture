@@ -48,7 +48,7 @@ class DailyNews extends StatelessWidget {
         return ListView.builder(
             itemCount: state.articles!.length,
             itemBuilder: (context, index) {
-              logApp(state.articles);
+              logApp(['state.articles', state.articles]);
               return ArticleTile(
                 article: state.articles![index],
               );

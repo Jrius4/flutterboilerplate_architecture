@@ -53,10 +53,11 @@ class _NewApiService implements NewApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    List<ArticleModel> value = _result.data!["articles"]
+
+    List<ArticleModel> value = List<ArticleModel>.from(_result.data!["articles"]
         .map<ArticleModel>(
-            (dynamic i) => ArticleModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+            (i) => ArticleModel.fromJson(i as Map<String, dynamic>))).toList();
+
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

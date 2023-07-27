@@ -21,7 +21,7 @@ class ArticleRepositoryImpl implements ArticleRepository {
           apiKey: Constants.apiKey,
           country: Constants.countryQuery,
           category: Constants.categoryQuery);
-      logApp(httpResponse);
+      logApp(['httpResponse: ', httpResponse]);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(httpResponse.data);
       } else {

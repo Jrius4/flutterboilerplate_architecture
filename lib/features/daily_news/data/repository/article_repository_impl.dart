@@ -35,7 +35,7 @@ class ArticleRepositoryImpl implements ArticleRepository {
       }
     } on DioException catch (e) {
       logApp([e]);
-      Future.error(e);
+      // Future.error(e);
       return DataFailed(e);
     }
   }
@@ -53,7 +53,10 @@ class ArticleRepositoryImpl implements ArticleRepository {
 
   @override
   Future<void> saveArticiles(ArticleEntity article) {
+    Map<String, dynamic> newArticle = article.toJson();
+    newArticle["uuid"] = getUuid();
+    ArticleEntity newItem = ArticleEntity.fromJson(newArticle);
     return _appDatabse.articleDao
-        .insertArticle(ArticleModel.fromEntity(article));
+        .insertArticle(ArticleModel.fromEntity(newItem));
   }
 }

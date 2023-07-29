@@ -6,23 +6,52 @@ import 'package:flutter_primary_architecture/features/daily_news/domain/entities
 
 class ArticleTile extends StatelessWidget {
   final ArticleEntity? article;
-  const ArticleTile({Key? key, this.article}) : super(key: key);
+  final bool? isRemovable;
+  final void Function(ArticleEntity article)? onRemove;
+  final void Function(ArticleEntity article)? onArticlePressed;
+  const ArticleTile(
+      {Key? key,
+      this.article,
+      this.onArticlePressed,
+      this.onRemove,
+      this.isRemovable = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsetsDirectional.only(
-          start: 14, end: 14, top: 16, bottom: 20),
-      height: MediaQuery.of(context).size.width / 2.2,
-      child: Row(children: [_buildImage(), _buildTitleAndDescription()]),
+    return GestureDetector(
+      onTap: _onTap,
+      child: Container(
+        padding: const EdgeInsetsDirectional.only(
+            start: 14, end: 14, top: 16, bottom: 20),
+        height: MediaQuery.of(context).size.width / 2.2,
+        child: Row(children: [
+          _buildImage(),
+          _buildTitleAndDescription(),
+          _buildRemovableArea()
+        ]),
+      ),
     );
   }
 
   Widget _buildImage() {
-    return article!.urlToImage == null
-        ? SizedBox(
-            child: CustomText(textString: "Image Found"),
-          )
+    return article!.urlToImage == ""
+        ? Builder(builder: (context) {
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Container(
+                width: MediaQuery.of(context).size.width / 3,
+                height: double.maxFinite,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.08),
+                ),
+                child: const Icon(
+                  Icons.image_not_supported_outlined,
+                  size: 100,
+                ),
+              ),
+            );
+          })
         : CachedNetworkImage(
             imageUrl: article!.urlToImage ?? '',
             imageBuilder: (context, imageProvider) => Padding(
@@ -61,10 +90,10 @@ class ArticleTile extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width / 3,
                   height: double.maxFinite,
-                  child: const Icon(Icons.error),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.08),
                   ),
+                  child: const Icon(Icons.error),
                 ),
               ),
             ),
@@ -107,5 +136,30 @@ class ArticleTile extends StatelessWidget {
             )
           ]),
     ));
+  }
+
+  Widget _buildRemovableArea() {
+    if (isRemovable!) {
+      return GestureDetector(
+        onTap: _onRemove,
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Icon(Icons.remove_circle_outline, color: Colors.red),
+        ),
+      );
+    }
+    return Container();
+  }
+
+  void _onTap() {
+    if (onArticlePressed != null) {
+      onArticlePressed!(article!);
+    }
+  }
+
+  void _onRemove() {
+    if (onRemove != null) {
+      onRemove!(article!);
+    }
   }
 }

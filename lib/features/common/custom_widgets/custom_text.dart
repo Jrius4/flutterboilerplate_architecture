@@ -23,8 +23,8 @@ class CustomText extends StatelessWidget {
     return Text(
       textString,
       textAlign: textAlign ?? TextAlign.center,
-      maxLines: textMaxLines ?? 10,
-      overflow: TextOverflow.ellipsis,
+      maxLines: textMaxLines,
+      overflow: textMaxLines == null ? null : TextOverflow.ellipsis,
       style: TextStyle(
           fontFamily: textFamily ?? 'Comfortaa',
           fontSize: textFontSize ?? 12,

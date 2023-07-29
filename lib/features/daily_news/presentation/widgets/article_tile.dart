@@ -102,7 +102,7 @@ class ArticleTile extends StatelessWidget {
                 const SizedBox(
                   width: 4,
                 ),
-                CustomText(textString: "${article!.publishedAt!.toLocal()}")
+                CustomText(textString: "${article!.publishedAt}")
               ],
             )
           ]),

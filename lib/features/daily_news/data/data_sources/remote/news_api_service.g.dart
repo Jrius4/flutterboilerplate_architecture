@@ -4,7 +4,6 @@ part of 'news_api_service.dart';
 
 // **************************************************************************
 // RetrofitGenerator
-
 // **************************************************************************
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
@@ -53,11 +52,10 @@ class _NewApiService implements NewApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-
-    List<ArticleModel> value = List<ArticleModel>.from(_result.data!["articles"]
+    List<ArticleModel> value = _result.data!['articles']
         .map<ArticleModel>(
-            (i) => ArticleModel.fromJson(i as Map<String, dynamic>))).toList();
-
+            (dynamic i) => ArticleModel.fromJson(i as Map<String, dynamic>))
+        .toList();
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

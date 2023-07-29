@@ -7,17 +7,17 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class ArticleEntity extends Equatable {
-  final Source? source;
+  final String? uuid;
   final String? author;
   final String? title;
   final String? description;
   final String? url;
   final String? urlToImage;
-  final DateTime? publishedAt;
+  final String? publishedAt;
   final String? content;
 
   const ArticleEntity({
-    this.source,
+    this.uuid,
     this.author,
     this.title,
     this.description,
@@ -28,17 +28,17 @@ class ArticleEntity extends Equatable {
   });
 
   ArticleEntity copyWith({
-    Source? source,
+    String? uuid,
     String? author,
     String? title,
     String? description,
     String? url,
     String? urlToImage,
-    DateTime? publishedAt,
+    String? publishedAt,
     String? content,
   }) =>
       ArticleEntity(
-        source: source ?? this.source,
+        uuid: uuid ?? this.uuid,
         author: author ?? this.author,
         title: title ?? this.title,
         description: description ?? this.description,
@@ -54,33 +54,31 @@ class ArticleEntity extends Equatable {
   String toRawJson() => json.encode(toJson());
 
   factory ArticleEntity.fromJson(Map<String, dynamic> json) => ArticleEntity(
-        source: json["source"] == null ? null : Source.fromJson(json["source"]),
+        uuid: json["uuid"],
         author: json["author"],
         title: json["title"],
         description: json["description"],
         url: json["url"],
         urlToImage: json["urlToImage"],
-        publishedAt: json["publishedAt"] == null
-            ? null
-            : DateTime.parse(json["publishedAt"]),
+        publishedAt: json["publishedAt"] ?? "",
         content: json["content"],
       );
 
   Map<String, dynamic> toJson() => {
-        "source": source?.toJson(),
+        "uuid": uuid,
         "author": author,
         "title": title,
         "description": description,
         "url": url,
         "urlToImage": urlToImage,
-        "publishedAt": publishedAt?.toIso8601String(),
+        "publishedAt": publishedAt,
         "content": content,
       };
 
   @override
   List<Object?> get props {
     return [
-      source,
+      uuid,
       author,
       title,
       description,

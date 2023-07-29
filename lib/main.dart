@@ -10,6 +10,7 @@ import 'package:flutter_primary_architecture/injection_container.dart';
 import 'package:dio/dio.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env"); // load env variables from the .env file
   await initializeDependencies();
   runApp(const MyApp());
